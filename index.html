@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React tutorial</title>
+</head>
+<body>
+    <div id="content"></div>
+    <script src="/bower_components/react/react.js"></script>
+    <script src="/bower_components/react/JSXTransformer.js"></script>
+    <script type="text/jsx">
+        /**
+         * @jsx React.DOM
+         */
+        var CommentBox = React.createClass({
+            render: function() {
+                return (
+                    <div className="commentBox">
+                        Hello, world! I m a CommentBox.
+                    </div>
+                );
+            }
+        })
+        React.renderComponent(
+            <CommentBox />,
+            document.getElementById('content')
+        );
+    </script>
+</body>
+</html>
