@@ -8,6 +8,7 @@
     <div id="content"></div>
     <script src="/bower_components/react/react.js"></script>
     <script src="/bower_components/react/JSXTransformer.js"></script>
+    <script src="/bower_components/showdown/src/showdown.js"></script>
     <script type="text/jsx">
         /**
          * @jsx React.DOM
@@ -29,7 +30,7 @@
                 return (
                     <div className="commentList">
                         <Comment author="Someone">A comment.</Comment>
-                        <Comment author="Someone else">Another comment.</Comment>
+                        <Comment author="Someone else">**Another comment**.</Comment>
                     </div>
                 )
             }
@@ -45,14 +46,17 @@
             }
         })
 
+        var converter = new Showdown.converter()
+
         var Comment = React.createClass({
             render: function() {
+                var rawMarkup = converter.makeHtml(this.props.children.toString())
                 return (
                     <div className="comment">
                         <h2 className="commentAuthor">
                             {this.props.author}
                         </h2>
-                        {this.props.children}
+                        <span dangerouslySetInnerHTML={{__html: rawMarkup}} />
                     </div>
                 )
             }
